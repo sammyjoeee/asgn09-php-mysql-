@@ -1,50 +1,51 @@
-<?php require_once('../../private/initialize.php');
+<?php 
+
+require_once('../../private/initialize.php');
 
 if(!isset($_GET['id'])) {
-  redirect_to(url_for('/staff/subjects/index.php'));
+  redirect_to(url_for('/salamanders/pages/index.php'));
 }
 $id = $_GET['id'];
 $salamanderName = '';
 $position = '';
-$visible = '';  
+$visible = '';
 
 if(is_post_request()) {
 
   // Handle form values sent by new.php
 
-  $menu_name = $_POST['salamanderName'] ?? '';
+  $salamanderName = $_POST['salamanderName'] ?? '';
   $position = $_POST['position'] ?? '';
   $visible = $_POST['visible'] ?? '';
 
   echo "Form parameters<br />";
-  echo "Salamander name: " . $salamanderName . "<br />";
+  echo "Salamander Name: " . $salamanderName . "<br />";
   echo "Position: " . $position . "<br />";
   echo "Visible: " . $visible . "<br />";
 }
 
 ?>
 
-
 <?php $page_title = 'Edit Salamander'; ?>
 <?php include(SHARED_PATH . '/salamanderHeader.php'); ?>
 
 <div id="content">
 
-  <a class="back-link" href="<?php echo url_for('index.php'); ?>">&laquo; Home</a>
+  <a class="back-link" href="<?php echo url_for('/salamanders/index.php'); ?>">&laquo; Back to List</a>
 
-  <div class="subject edit">
-    <h1>Edit Salamander</h1>
+  <div class="page edit">
+    <h1>Edit Page</h1>
 
-    <form action="<?php echo url_for('salamanders/edit.php?id=' . h(u($id))); ?>" method="post">
+    <form action="<?php echo url_for('/salamanders/edit.php?id=' . h(u($id))); ?>" method="post">
       <dl>
-        <dt>Name</dt>
-        <dd><input type="text" name="salamanderName" value="" /></dd>
+        <dt>Salamander Name</dt>
+        <dd><input type="text" name="salamanderName" value="<?php echo h($salamanderName); ?>" /></dd>
       </dl>
       <dl>
         <dt>Position</dt>
         <dd>
           <select name="position">
-            <option value="1">1</option>
+            <option value="1"<?php if($position == "1") { echo " selected"; } ?>>1</option>
           </select>
         </dd>
       </dl>
@@ -52,11 +53,11 @@ if(is_post_request()) {
         <dt>Visible</dt>
         <dd>
           <input type="hidden" name="visible" value="0" />
-          <input type="checkbox" name="visible" value="1" />
+          <input type="checkbox" name="visible" value="1"<?php if($visible == "1") { echo " checked"; } ?> />
         </dd>
       </dl>
       <div id="operations">
-        <input type="submit" value="Edit Salamander" />
+        <input type="submit" value="Edit Page" />
       </div>
     </form>
 

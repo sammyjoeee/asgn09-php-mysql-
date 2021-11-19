@@ -1,6 +1,6 @@
 <?php require_once('../private/initialize.php'); ?>
 
-<?php $page_title = 'Home'; ?>
+<?php $salamanders = 'Home'; ?>
 <?php include(SHARED_PATH . '/salamanderHeader.php'); ?>
 
 <div id="content">

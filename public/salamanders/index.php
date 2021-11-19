@@ -1,12 +1,9 @@
 <?php require_once('../../private/initialize.php'); ?>
 
 <?php
-  $pages = [
-    ['id' => '1', 'position' => '1', 'visible' => '1', 'salamanderName' => 'Red-Legged Salamander'],
-    ['id' => '2', 'position' => '2', 'visible' => '1', 'salamanderName' => 'Pigeon Mountain Salamander'],
-    ['id' => '3', 'position' => '3', 'visible' => '1', 'salamanderName' => 'ZigZag Salamander'],
-    ['id' => '4', 'position' => '4', 'visible' => '1', 'salamanderName' => 'Slimy Salamander'],
-  ];
+
+  $subject_set = find_all_salamanders();
+
 ?>
 
 <?php $page_title = 'Salamanders'; ?>
@@ -16,7 +13,7 @@
     <h1>Salamanders</h1>
 
     <div class="actions">
-      <a class="action" href="<?php echo url_for('salamanders/create.php'); ?>">Create Salamander</a>
+    <a class="action" href="<?php echo url_for('/salamanders/new.php'); ?>">Create New Salamander</a>
     </div>
 
   	<table class="list">
@@ -30,18 +27,21 @@
         <th>&nbsp;</th>
   	  </tr>
 
-      <?php foreach($pages as $page) { ?>
-        <tr>
-          <td><?php echo h($page['id']); ?></td>
-          <td><?php echo h($page['position']); ?></td>
-          <td><?php echo $page['visible'] == 1 ? 'true' : 'false'; ?></td>
-    	    <td><?php echo h($page['salamanderName']); ?></td>
-          <td><a class="action" href="<?php echo url_for('salamanders/show.php?id=' . h(u($page['id']))); ?>">View</a></td>
-          <td><a class="action" href="<?php echo url_for('salamanders/edit.php?id=' . h(u($page['id']))); ?>">Edit</a></td>
-          <td><a class="action" href="">Delete</a></td>
-    	  </tr>
-      <?php } ?>
+        <?php while($salamander = mysqli_fetch_assoc($subject_set)) { ?>
+          <tr>
+            <td><?php echo h($salamander['id']); ?></td>
+            <td><?php echo h($salamander['position']); ?></td>
+            <td><?php echo $salamander['visible'] == 1 ? 'true' : 'false'; ?></td>
+            <td><?php echo h($salamander['salamanderName']); ?></td>
+            <td><a class=="action" href="<?php echo url_for('salamanders/show.php?id=' . h(u($page['id']))); ?>"
+            <td><a class=="action" href="<?php echo url_for('salamanders/edit.php?id=' . h(u($page['id']))); ?>"
+            <td><a class=="action" href="">Delete</a></td>
+          </tr>
+        <?php } ?>
+
   	</table>
+
+    <?php mysqli_free_result($salamander_set); ?>
 
   </div>
 
