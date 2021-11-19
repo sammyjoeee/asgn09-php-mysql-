@@ -2,7 +2,9 @@
 
 <?php
 
-  $subject_set = find_all_salamanders();
+  $sql = "SELECT * FROM salamanders ";
+  $sql .= "ORDER BY position ACS";
+  $subject_set = mysqli_query($db, $sql);
 
 ?>
 
